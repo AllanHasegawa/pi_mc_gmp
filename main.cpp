@@ -6,23 +6,33 @@
 int main(void) {
 	using namespace std;
 	// precision ;)
-	const int kP = 90000;
+	const int kPresicionBits = 512;
+	const int kSamples = 9000000;
 
 	// using Mersene Twister engine
 	gmp_randclass r1(gmp_randinit_mt);
 
 	// seed providade by a random device (implementation defined)
 	r1.seed(random_device{}());
-	cout << setprecision(kP);
 
-	cout << r1.get_f(kP) << endl;
+	mpf_class x(0, kPresicionBits);
+	mpf_class y(0, kPresicionBits);
+	int counter{};
+	for (int i = 0; i < kSamples; ++i) {
+		x = r1.get_f();
+		y = r1.get_f();
+		x = x*x;
+		y = y*y;
+		if (x+y < 1) ++counter;
+	}
 
-	mpf_t sum;
-	mpf_init(sum);
-	mpf_set_str(sum, "12345", 10);
-	cout << sum << endl;
-	mpf_clear(sum);
-	int i{};
-	cout << i << endl;
+	mpf_class pi(0, kPresicionBits);
+	pi = counter;
+	pi = pi*4;
+	pi = pi/kSamples;
+	
+	cout << setprecision(200);
+	cout << pi << endl;
+
 	return 0;
 }
