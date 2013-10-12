@@ -12,9 +12,9 @@ Finding PI with Monte Carlo and GMP
  * Hardware: i7 4770k
 
 
-	$ 3.1415688
-	$	
-	$ real    2m40.191s
-	$ user    20m25.010s
- 	$ sys     0m0.159s
+    $ 3.1415688
+    $	
+    $ real    2m40.191s
+    $ user    20m25.010s
+    $ sys     0m0.159s
 
